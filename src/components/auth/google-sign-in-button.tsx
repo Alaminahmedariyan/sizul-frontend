@@ -13,13 +13,9 @@ export function GoogleSignInButton() {
     setLoading(true);
     setError(null);
 
-    // Read at click time so this component does not need a Suspense boundary.
-    const redirectTo = new URLSearchParams(window.location.search).get(
-      "redirect",
-    );
-    const callbackURL = redirectTo
-      ? `${window.location.origin}/redirect?to=${encodeURIComponent(redirectTo)}`
-      : `${window.location.origin}/redirect`;
+    const redirectTo = new URLSearchParams(window.location.search).get("redirect");
+    const targetPath = redirectTo || "/dashboard";
+    const callbackURL = `${window.location.origin}${targetPath}`;
 
     try {
       const { error: authError } = await authClient.signIn.social({
@@ -31,7 +27,6 @@ export function GoogleSignInButton() {
         setError(authError.message ?? "Google sign in failed. Try again.");
         setLoading(false);
       }
-      // On success the browser is redirected, so keep the loading state.
     } catch {
       setError("Could not reach Google. Check your connection and try again.");
       setLoading(false);
