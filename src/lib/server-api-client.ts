@@ -1,4 +1,4 @@
-import { cookies } from "next/headers";
+import { headers } from "next/headers";
 import { ofetch } from "ofetch";
 import type { ApiErrorResponse } from "@/types/api";
 import ApiError from "./api-error";
@@ -7,13 +7,15 @@ export async function serverApiClient<T = unknown>(
   url: string,
   options?: Parameters<typeof ofetch<T>>[1],
 ) {
-  const cookieStore = await cookies();
+  const reqHeaders = await headers();
+  const cookieHeader = reqHeaders.get("cookie") || "";
 
   return ofetch<T>(url, {
     baseURL: process.env.NEXT_PUBLIC_API_URL,
+    credentials: "include",
     ...options,
     headers: {
-      cookie: cookieStore.toString(),
+      cookie: cookieHeader,
       ...options?.headers,
     },
     async onResponseError({ response }) {
