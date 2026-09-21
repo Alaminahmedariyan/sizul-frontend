@@ -14,8 +14,11 @@ export function GoogleSignInButton() {
     setError(null);
 
     const redirectTo = new URLSearchParams(window.location.search).get("redirect");
-    const targetPath = redirectTo || "/dashboard";
-    const callbackURL = `${window.location.origin}${targetPath}`;
+
+    // Clear and explicit callbackURL pointing to /redirect gateway
+    const callbackURL = redirectTo
+      ? `${window.location.origin}/redirect?to=${encodeURIComponent(redirectTo)}`
+      : `${window.location.origin}/redirect`;
 
     try {
       const { error: authError } = await authClient.signIn.social({
