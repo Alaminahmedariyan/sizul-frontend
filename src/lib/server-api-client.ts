@@ -3,15 +3,21 @@ import { ofetch } from "ofetch";
 import type { ApiErrorResponse } from "@/types/api";
 import ApiError from "./api-error";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
+
 export async function serverApiClient<T = unknown>(
   url: string,
   options?: Parameters<typeof ofetch<T>>[1],
 ) {
+  if (!API_URL) {
+    throw new Error("NEXT_PUBLIC_API_URL is not configured.");
+  }
+
   const reqHeaders = await headers();
   const cookieHeader = reqHeaders.get("cookie") || "";
 
   return ofetch<T>(url, {
-    baseURL: process.env.NEXT_PUBLIC_API_URL,
+    baseURL: API_URL,
     credentials: "include",
     ...options,
     headers: {

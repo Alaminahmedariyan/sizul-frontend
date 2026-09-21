@@ -20,17 +20,22 @@ export function GoogleSignInButton() {
       ? `${window.location.origin}/redirect?to=${encodeURIComponent(redirectTo)}`
       : `${window.location.origin}/redirect`;
 
+    // Where Better Auth sends the user if the OAuth flow fails
+    const errorCallbackURL = `${window.location.origin}/sign-in`;
+
     try {
       const { error: authError } = await authClient.signIn.social({
         provider: "google",
         callbackURL,
+        errorCallbackURL,
       });
 
       if (authError) {
         setError(authError.message ?? "Google sign in failed. Try again.");
         setLoading(false);
       }
-    } catch {
+    } catch (caughtError) {
+      console.error("[GoogleSignIn] Request failed:", caughtError);
       setError("Could not reach Google. Check your connection and try again.");
       setLoading(false);
     }

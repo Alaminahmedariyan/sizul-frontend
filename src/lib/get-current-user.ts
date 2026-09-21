@@ -9,7 +9,8 @@ export const getCurrentUser = cache(async (): Promise<SessionUser | null> => {
       "/api/v1/auth/session",
     );
     return res.data;
-  } catch {
+  } catch (error) {
+    console.error("[getCurrentUser] Failed to load session:", error);
     return null;
   }
 });
