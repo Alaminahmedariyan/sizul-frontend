@@ -12,9 +12,7 @@ if (!API_URL) {
 export const authClient = createAuthClient({
   baseURL: API_URL,
   basePath: "/api/auth",
-
   plugins: [emailOTPClient()],
-
   fetchOptions: {
     credentials: "include",
   },
@@ -25,6 +23,4 @@ export const {
   signUp,
   signOut,
   useSession,
-  forgetPassword,
-  resetPassword,
 } = authClient;

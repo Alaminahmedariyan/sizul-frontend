@@ -97,27 +97,27 @@ export function SignUpForm() {
   const isBusy = isSubmitting || isRedirecting;
   const passwordValue = form.watch("password");
 
-  const onSubmit = async (values: SignUpValues) => {
-    setFormError(null);
+const onSubmit = async (values: SignUpValues) => {
+  setFormError(null);
 
-    const { error } = await authClient.signUp.email({
-      name: values.name,
-      email: values.email,
-      password: values.password,
-    });
+  const { error } = await authClient.signUp.email({
+    name: values.name,
+    email: values.email,
+    password: values.password,
+  });
 
-    if (error) {
-      setFormError(error.message ?? "Sign up failed. Please try again.");
-      return;
-    }
+  if (error) {
+    setFormError(error.message ?? "Sign up failed. Please try again.");
+    return;
+  }
 
-    setIsRedirecting(true);
+  setIsRedirecting(true);
 
-    // Adjust this if email verification is required before the user can sign in —
-    // see the README note on this.
-    router.push("/redirect");
-    router.refresh();
-  };
+  // Email verification is required in production.
+  // Route through /verify-email so the user enters the OTP.
+  router.push(`/verify-email?email=${encodeURIComponent(values.email)}`);
+  router.refresh();
+};
 
   const buttonLabel = isRedirecting
     ? "Redirecting…"

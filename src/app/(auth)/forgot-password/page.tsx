@@ -1,12 +1,21 @@
 "use client";
 
+import { Mail } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import {
+  AuthSubmitButton,
+  FormAlert,
+  IconInput,
+} from "@/components/auth/auth-fields";
 import { authClient } from "@/lib/auth-client";
 
 export default function ForgotPasswordPage() {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
-  const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -15,43 +24,50 @@ export default function ForgotPasswordPage() {
     setError(null);
     setIsSubmitting(true);
 
-    const { error: reqError } = await authClient.forgetPassword.emailOtp({
-      email,
-    });
-
-    setIsSubmitting(false);
+    const { error: reqError } =
+      await authClient.emailOtp.requestPasswordReset({ email });
 
     if (reqError) {
       setError(reqError.message ?? "Something went wrong.");
+      setIsSubmitting(false);
       return;
     }
 
-    setSent(true);
+    router.push(`/reset-password?email=${encodeURIComponent(email)}`);
   };
 
-  if (sent) {
-    return <p>Check your email for a password reset link.</p>;
-  }
-
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Forgot password</h1>
-
-      {error && <p role="alert">{error}</p>}
-
-      <label>
-        Email
-        <input
+    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+      <div className="space-y-1.5">
+        <label htmlFor="email" className="text-[13px] font-medium">
+          Email
+        </label>
+        <IconInput
+          id="email"
+          icon={<Mail />}
           type="email"
+          autoComplete="email"
+          placeholder="you@company.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-      </label>
+      </div>
 
-      <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Sending..." : "Send reset link"}
-      </button>
+      {error && <FormAlert message={error} />}
+
+      <AuthSubmitButton busy={isSubmitting}>
+        {isSubmitting ? "Sending…" : "Send reset code"}
+      </AuthSubmitButton>
+
+      <p className="text-center text-sm text-muted-foreground">
+        <Link
+          href="/sign-in"
+          className="font-medium text-foreground underline-offset-4 hover:underline"
+        >
+          Back to sign in
+        </Link>
+      </p>
     </form>
   );
 }

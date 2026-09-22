@@ -1,6 +1,7 @@
 "use client";
 
 import { KeyRound } from "lucide-react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 
@@ -8,51 +9,72 @@ import {
   AuthSubmitButton,
   FormAlert,
   IconInput,
-  PasswordInput,
 } from "@/components/auth/auth-fields";
 import { authClient } from "@/lib/auth-client";
 
-function ResetPasswordContent() {
+function VerifyEmailContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get("email") ?? "";
 
   const [otp, setOtp] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isResending, setIsResending] = useState(false);
+  const [resendMessage, setResendMessage] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setIsSubmitting(true);
 
-    const { error: resetError } = await authClient.emailOtp.resetPassword({
+    const { error: verifyError } = await authClient.emailOtp.verifyEmail({
       email,
       otp,
-      password,
     });
 
-    if (resetError) {
-      setError(resetError.message ?? "Reset code is invalid or expired.");
+    if (verifyError) {
+      setError(verifyError.message ?? "Invalid or expired code.");
       setIsSubmitting(false);
       return;
     }
 
-    router.push("/sign-in");
+    // autoSignInAfterVerification: true — user is signed in after this
+    router.push("/redirect");
     router.refresh();
+  };
+
+  const handleResend = async () => {
+    setError(null);
+    setResendMessage(null);
+    setIsResending(true);
+
+    const { error: resendError } =
+      await authClient.emailOtp.sendVerificationOtp({
+        email,
+        type: "email-verification",
+      });
+
+    setIsResending(false);
+
+    if (resendError) {
+      setError(resendError.message ?? "Could not resend the code.");
+      return;
+    }
+
+    setResendMessage("A new code has been sent to your email.");
   };
 
   if (!email) {
     return (
       <div className="space-y-4">
-        <FormAlert message="Missing email. Please start the reset flow again." />
-        <a
-          href="/forgot-password"
+        <FormAlert message="Missing email. Please sign up again." />
+        <Link
+          href="/sign-up"
           className="inline-block text-sm font-medium text-foreground underline-offset-4 hover:underline"
         >
-          Back to forgot password
-        </a>
+          Back to sign up
+        </Link>
       </div>
     );
   }
@@ -81,35 +103,36 @@ function ResetPasswordContent() {
         />
       </div>
 
-      <div className="space-y-1.5">
-        <label htmlFor="password" className="text-[13px] font-medium">
-          New password
-        </label>
-        <PasswordInput
-          id="password"
-          autoComplete="new-password"
-          placeholder="At least 8 characters"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
-
       {error && <FormAlert message={error} />}
 
+      {resendMessage && (
+        <p className="text-sm text-emerald-600 dark:text-emerald-400">
+          {resendMessage}
+        </p>
+      )}
+
       <AuthSubmitButton busy={isSubmitting}>
-        {isSubmitting ? "Resetting…" : "Reset password"}
+        {isSubmitting ? "Verifying…" : "Verify email"}
       </AuthSubmitButton>
+
+      <button
+        type="button"
+        onClick={handleResend}
+        disabled={isResending}
+        className="w-full text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline disabled:opacity-50"
+      >
+        {isResending ? "Resending…" : "Resend code"}
+      </button>
     </form>
   );
 }
 
-export default function ResetPasswordPage() {
+export default function VerifyEmailPage() {
   return (
     <Suspense
       fallback={<p className="text-sm text-muted-foreground">Loading…</p>}
     >
-      <ResetPasswordContent />
+      <VerifyEmailContent />
     </Suspense>
   );
 }
