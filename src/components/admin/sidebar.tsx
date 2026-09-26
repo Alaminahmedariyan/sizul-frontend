@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import type { UserRole } from "@/types/auth";
 import { ADMIN_NAV } from "./nav-config";
+import { Logo } from "../marketing/logo";
 
 export function Sidebar({ role }: { role: UserRole }) {
   const pathname = usePathname();
@@ -17,12 +18,7 @@ export function Sidebar({ role }: { role: UserRole }) {
   return (
     <aside className="hidden md:flex w-64 shrink-0 flex-col border-r border-sidebar-border bg-sidebar">
       <div className="flex items-center gap-2 px-6 h-16 border-b border-sidebar-border">
-        <div className="size-8 rounded-lg bg-primary flex items-center justify-center">
-          <span className="text-primary-foreground font-bold text-sm">S</span>
-        </div>
-        <span className="font-semibold text-sidebar-foreground tracking-tight">
-          Sizul
-        </span>
+        <Logo />
       </div>
 
       <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-0.5">

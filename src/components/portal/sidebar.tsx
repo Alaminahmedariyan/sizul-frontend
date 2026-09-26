@@ -15,10 +15,6 @@ export function PortalSidebar() {
       {/* Brand */}
       <div className="flex h-16 items-center gap-3 border-b border-sidebar-border px-5">
         <Logo />
-
-        <span className="font-semibold tracking-tight text-sidebar-foreground">
-          Sizul
-        </span>
       </div>
 
       {/* Navigation */}
