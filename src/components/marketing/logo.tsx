@@ -5,31 +5,23 @@ import { cn } from "@/lib/utils";
 
 export function Logo({
   className,
-  showName = true,
 }: {
   className?: string;
-  showName?: boolean;
 }) {
   return (
     <Link
       href="/"
       aria-label={`${SITE.name} home`}
-      className={cn("flex shrink-0 items-center gap-2.5", className)}
+      className={cn("flex shrink-0 items-center", className)}
     >
       <Image
         src="/logo.png"
         alt={`${SITE.name} logo`}
-        width={32}
-        height={32}
+        width={60}
+        height={60}
         priority
-        className="size-8 rounded-xl object-contain"
+        className="h-12 w-auto object-contain"
       />
-
-      {showName && (
-        <span className="text-[15px] font-semibold tracking-tight">
-          {SITE.name}
-        </span>
-      )}
     </Link>
   );
 }
