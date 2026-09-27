@@ -19,6 +19,7 @@ export async function serverApiClient<T = unknown>(
   return ofetch<T>(url, {
     baseURL: API_URL,
     credentials: "include",
+    cache: "no-store",
     ...options,
     headers: {
       cookie: cookieHeader,
