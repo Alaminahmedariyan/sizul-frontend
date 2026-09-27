@@ -4,12 +4,17 @@ export type UserRole = "ADMIN" | "STAFF" | "CLIENT";
 export type UserStatus = "ACTIVE" | "INACTIVE" | "SUSPENDED";
 
 // Shape returned by the custom lightweight session endpoint:
-// GET /api/v1/auth/session  ->  { id, email, role, emailVerified }
+// GET /api/v1/auth/session  ->  matches authController.getMySession's `data` object
 export type SessionUser = {
   id: string;
   email: string;
+  name: string | null;
+  image: string | null;
   role: UserRole;
+  status: UserStatus;
   emailVerified: boolean;
+  twoFactorEnabled: boolean;
+  lastLoginAt: string | null;
 };
 
 // Shape returned by Better Auth's own `getSession` (fuller user object,

@@ -2,7 +2,7 @@ import { User as UserIcon } from "lucide-react";
 import { PortalMobileSidebar } from "@/components/portal/mobile-sidebar";
 import { SignOutButtonMenuItem } from "@/components/shared/sign-out-button";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,7 +12,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export function PortalTopbar({ email }: { email: string }) {
+export function PortalTopbar({
+  email,
+  image,
+  name,
+}: {
+  email: string;
+  image?: string | null;
+  name?: string | null;
+}) {
   return (
     <header className="h-16 border-b border-border flex items-center justify-between px-4 md:px-6 bg-background">
       <div className="flex items-center gap-2">
@@ -25,6 +33,13 @@ export function PortalTopbar({ email }: { email: string }) {
         <DropdownMenu>
           <DropdownMenuTrigger className="flex items-center gap-2 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring">
             <Avatar className="size-8 border border-border">
+              {image ? (
+                <AvatarImage
+                  src={image}
+                  alt={name ?? email}
+                  referrerPolicy="no-referrer"
+                />
+              ) : null}
               <AvatarFallback className="bg-primary text-primary-foreground text-xs">
                 {email.charAt(0).toUpperCase()}
               </AvatarFallback>

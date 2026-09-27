@@ -2,7 +2,7 @@ import { User as UserIcon } from "lucide-react";
 import { MobileSidebar } from "@/components/admin/mobile-sidebar";
 import { SignOutButtonMenuItem } from "@/components/shared/sign-out-button";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
@@ -15,7 +15,17 @@ import {
 
 import type { UserRole } from "@/types/auth";
 
-export function Topbar({ email, role }: { email: string; role: UserRole }) {
+export function Topbar({
+  email,
+  role,
+  image,
+  name,
+}: {
+  email: string;
+  role: UserRole;
+  image?: string | null;
+  name?: string | null;
+}) {
   return (
     <header className="h-16 border-b border-border flex items-center justify-between px-4 md:px-6 bg-background">
       <div className="flex items-center gap-2">
@@ -28,6 +38,13 @@ export function Topbar({ email, role }: { email: string; role: UserRole }) {
         <DropdownMenu>
           <DropdownMenuTrigger className="flex items-center gap-2 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring">
             <Avatar className="size-8 border border-border">
+              {image ? (
+                <AvatarImage
+                  src={image}
+                  alt={name ?? email}
+                  referrerPolicy="no-referrer"
+                />
+              ) : null}
               <AvatarFallback className="bg-primary text-primary-foreground text-xs">
                 {email.charAt(0).toUpperCase()}
               </AvatarFallback>
