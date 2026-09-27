@@ -14,6 +14,9 @@ export default async function PortalLayout({
 }) {
   const user = await getCurrentUser();
 
+  // TEMP DEBUG — remove after checking logs
+  console.log("[PortalLayout DEBUG] user:", JSON.stringify(user, null, 2));
+
   if (!user) {
     redirect("/sign-in?redirect=/portal/dashboard");
   }
