@@ -18,21 +18,26 @@ export function Logo({
         className,
       )}
     >
-      <Image
-        src="/logo.png"
-        alt={`${SITE.name} logo`}
-        width={80}
-        height={80}
-        priority
-        className={cn(
-          "relative h-12 w-auto object-contain",
-          "drop-shadow-[0_0_3px_rgba(59,130,246,0.95)]",
-          "drop-shadow-[0_0_8px_rgba(59,130,246,0.65)]",
-          "transition-all duration-300",
-          "group-hover:drop-shadow-[0_0_4px_rgba(96,165,250,1)]",
-          "group-hover:drop-shadow-[0_0_10px_rgba(59,130,246,0.85)]",
-        )}
-      />
+      <span className="relative block h-12 w-[96px]">
+        <Image
+          src="/logo-without-a.png"
+          alt={`${SITE.name} logo`}
+          width={1774}
+          height={887}
+          priority
+          className="absolute inset-0 h-full w-full object-contain"
+        />
+
+        <Image
+          src="/logo-a.png"
+          alt=""
+          aria-hidden="true"
+          width={1774}
+          height={887}
+          priority
+          className="logo-a-color absolute inset-0 h-full w-full object-contain"
+        />
+      </span>
     </Link>
   );
 }
