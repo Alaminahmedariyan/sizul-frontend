@@ -52,6 +52,19 @@
 }
 
 :root {
+    /* Premium Hero Orbit — Light */
+  --hero-orbit-a: #06b6d4;
+  --hero-orbit-b: #4f72e8;
+  --hero-orbit-c: #7c5ce8;
+  --hero-orbit-d: #c084fc;
+  --hero-orbit-core: #ffffff;
+
+  --hero-blob-a: #4f8bff;
+  --hero-blob-b: #5148d8;
+  --hero-blob-c: #8757df;
+  --hero-blob-d: #d98bd7;
+
+  --hero-glow: rgba(79, 139, 255, 0.28);
   --background: oklch(0.99 0.003 262);
   --foreground: oklch(0.18 0.02 262);
 
@@ -156,6 +169,20 @@
    light (top highlights, soft glows), not from heavy borders. Amber stays
    reserved for "live"/status moments. */
 .dark {
+
+    /* Premium Hero Orbit — Dark */
+  --hero-orbit-a: #22d3ee;
+  --hero-orbit-b: #638cff;
+  --hero-orbit-c: #8b7cf6;
+  --hero-orbit-d: #d38cff;
+  --hero-orbit-core: #f8fbff;
+
+  --hero-blob-a: #386eff;
+  --hero-blob-b: #453dc7;
+  --hero-blob-c: #7349c9;
+  --hero-blob-d: #b85fb9;
+
+  --hero-glow: rgba(75, 120, 255, 0.34);
   --background: oklch(0.145 0.014 265);
   --foreground: oklch(0.965 0.006 265);
 

@@ -6,7 +6,6 @@ import {
   Monitor,
   Phone,
   Rocket,
-  Sparkles,
   Star,
   TrendingUp,
   Trophy,
@@ -14,6 +13,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
+
 import { formatStat, SITE, STATS } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -27,34 +27,31 @@ const FEATURES: { icon: LucideIcon; label: string }[] = [
   { icon: BarChart3, label: "More traffic and conversions" },
 ];
 
+const BLOB =
+  "M470 85C560 82 640 135 668 235C695 335 650 465 622 555C596 640 480 690 345 672C215 655 112 565 83 445C60 345 108 245 190 172C268 105 380 88 470 85Z";
+
+const ORBIT_BACK = "M-318 0A318 160 0 0 1 318 0";
+const ORBIT_FRONT = "M-318 0A318 160 0 0 0 318 0";
+
 export function Hero() {
   return (
     <section className="relative isolate overflow-hidden pb-16 pt-8 md:pb-20 md:pt-12">
-      {/* ───────── Background ───────── */}
+      {/* Background */}
       <div
-        aria-hidden
+        aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
-        {/* base wash */}
         <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.07] via-transparent to-transparent" />
-
-        {/* grid, focused around the portrait side */}
         <div className="hero-grid [mask-image:radial-gradient(ellipse_70%_65%_at_68%_40%,black,transparent_75%)]" />
-
-        {/* mesh glows */}
-        <div className="absolute -right-32 -top-40 size-[40rem] rounded-full bg-primary/25 blur-[140px]" />
-        <div className="absolute -left-24 top-1/3 size-[28rem] rounded-full bg-violet-500/15 blur-[130px]" />
-        <div className="absolute -bottom-32 left-1/3 size-[26rem] rounded-full bg-signal/15 blur-[120px]" />
-
-        {/* top highlight line */}
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-
-        {/* bottom blend into next section */}
+        <div className="absolute -right-32 -top-40 size-[40rem] rounded-full bg-primary/20 blur-[150px] dark:bg-primary/25" />
+        <div className="absolute -left-24 top-1/3 size-[28rem] rounded-full bg-violet-500/10 blur-[140px] dark:bg-violet-500/15" />
+        <div className="absolute -bottom-32 left-1/3 size-[26rem] rounded-full bg-signal/10 blur-[130px] dark:bg-signal/15" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/35 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
       </div>
 
-      <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-8">
-        {/* ───────── Left: content ───────── */}
+      <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-8">
+        {/* Left content */}
         <div className="flex flex-col justify-center">
           <Stagger immediate>
             <StaggerItem>
@@ -135,77 +132,445 @@ export function Hero() {
           </Stagger>
         </div>
 
-        {/* ───────── Right: cut-out portrait ───────── */}
-        {/* lg:-mt-12 pulls the whole image block up. Adjust: -mt-8 / -mt-16 / -mt-20 */}
+        {/* Right visual */}
         <Reveal
           immediate
           x={32}
           y={0}
           delay={0.25}
-          className="relative mx-auto h-[26rem] w-full max-w-md sm:h-[32rem] lg:-mt-12 lg:h-[36rem] lg:max-w-none"
+          className="relative isolate mx-auto aspect-[820/730] w-full max-w-[46rem] [container-type:inline-size] lg:-mr-[6%] lg:ml-auto lg:w-[112%] lg:max-w-none"
         >
-          {/* dot pattern, faded at the edges */}
+          {/* Ambient light */}
           <div
-            aria-hidden
-            className="absolute inset-x-[4%] bottom-[8%] top-[6%] -z-10 text-primary/35 [background-image:radial-gradient(currentColor_1.2px,transparent_1.2px)] [background-size:18px_18px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_68%)]"
+            aria-hidden="true"
+            className="absolute -right-[12%] -top-[14%] z-0 h-[75%] w-[75%] rounded-full bg-[var(--hero-glow)] blur-[120px]"
           />
-
-          {/* aurora glow */}
           <div
-            aria-hidden
-            className="absolute left-1/2 top-[42%] -z-10 size-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-primary/50 via-signal/30 to-transparent blur-[70px]"
+            aria-hidden="true"
+            className="absolute right-[12%] top-[10%] z-0 size-[62%] rounded-full bg-primary/10 blur-[100px] dark:bg-primary/15"
           />
-
-          {/* solid gradient disc behind the person */}
           <div
-            aria-hidden
-            className="absolute left-1/2 top-[50%] -z-10 size-[20rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-b from-primary to-signal opacity-90 shadow-[0_30px_90px_-20px] shadow-primary/60 sm:size-[26rem]"
+            aria-hidden="true"
+            className="absolute left-[25%] top-[28%] z-0 size-[45%] rounded-full bg-violet-500/10 blur-[90px]"
           />
 
-          {/* transparent PNG, background removed */}
-          <Image
-            src="/images/hero-profile.png"
-            alt="Founder portrait"
-            fill
-            priority
-            sizes="(min-width: 1024px) 34rem, 90vw"
-            className="z-10 object-contain object-bottom drop-shadow-[0_25px_40px_rgba(0,0,0,0.25)] [mask-image:linear-gradient(to_bottom,black_82%,transparent_100%)]"
-          />
+          {/* ===================== BACK SVG ===================== */}
+          <svg
+            aria-hidden="true"
+            role="presentation"
+            focusable="false"
+            viewBox="0 0 820 730"
+            fill="none"
+            className="pointer-events-none absolute inset-0 z-10 size-full overflow-visible"
+          >
+            <defs>
+              <linearGradient
+                id="hv-blob"
+                gradientUnits="userSpaceOnUse"
+                x1="600"
+                y1="100"
+                x2="150"
+                y2="620"
+              >
+                <stop offset="0" stopColor="var(--hero-blob-a)" />
+                <stop offset="0.32" stopColor="var(--hero-blob-b)" />
+                <stop offset="0.65" stopColor="var(--hero-blob-c)" />
+                <stop offset="1" stopColor="var(--hero-blob-d)" />
+              </linearGradient>
 
-          {/* sparkles */}
-          <Sparkles className="absolute left-[8%] top-[10%] z-20 size-6 animate-float text-primary" />
-          <Sparkles className="absolute right-[10%] top-[28%] z-20 size-4 animate-float-delayed text-signal" />
-          <Sparkles className="absolute bottom-[30%] right-[4%] z-20 size-5 animate-float text-primary/70" />
+              <radialGradient
+                id="hv-blob-top"
+                gradientUnits="userSpaceOnUse"
+                cx="520"
+                cy="110"
+                r="210"
+              >
+                <stop offset="0" stopColor="var(--hero-orbit-b)" stopOpacity="0.42" />
+                <stop offset="1" stopColor="var(--hero-orbit-b)" stopOpacity="0" />
+              </radialGradient>
 
-          {/* floating stat cards */}
-          <FloatCard className="left-0 top-[22%] sm:-left-6">
-            <IconBubble className="bg-primary">
-              <Trophy className="size-4" />
-            </IconBubble>
-            <StatText
-              value={formatStat(STATS.years)}
-              label={STATS.years.label}
+              <radialGradient
+                id="hv-blob-br"
+                gradientUnits="userSpaceOnUse"
+                cx="560"
+                cy="530"
+                r="230"
+              >
+                <stop offset="0" stopColor="var(--hero-orbit-a)" stopOpacity="0.36" />
+                <stop offset="1" stopColor="var(--hero-orbit-a)" stopOpacity="0" />
+              </radialGradient>
+
+              <linearGradient
+                id="hv-orbit-spectrum-back"
+                gradientUnits="userSpaceOnUse"
+                x1="-318"
+                y1="0"
+                x2="318"
+                y2="0"
+              >
+                <stop offset="0" stopColor="#20E3D5" />
+                <stop offset="0.2" stopColor="#18A9E8" />
+                <stop offset="0.42" stopColor="#4D5FEA" />
+                <stop offset="0.62" stopColor="#F27A6A" />
+                <stop offset="0.82" stopColor="#9C5DE8" />
+                <stop offset="1" stopColor="#C778F2" />
+              </linearGradient>
+
+              {/* BACK TRAIL — auto color change */}
+              <linearGradient
+                id="hv-orbit-trail-back"
+                gradientUnits="userSpaceOnUse"
+                x1="-318"
+                y1="0"
+                x2="318"
+                y2="0"
+              >
+                <stop offset="0">
+                  <animate
+                    attributeName="stop-color"
+                    values="#6FFFF3;#2ED4FF;#687CFF;#FF8B70;#B56CFF;#D69AFF;#6FFFF3"
+                    dur="60s"
+                    keyTimes="0;0.1667;0.3333;0.5;0.6667;0.8333;0.9999"
+                    calcMode="discrete"
+                    repeatCount="indefinite"
+                  />
+                </stop>
+                <stop offset="0.5">
+                  <animate
+                    attributeName="stop-color"
+                    values="#2ED4FF;#687CFF;#FF8B70;#B56CFF;#D69AFF;#6FFFF3;#2ED4FF"
+                    dur="60s"
+                    keyTimes="0;0.1667;0.3333;0.5;0.6667;0.8333;0.9999"
+                    calcMode="discrete"
+                    repeatCount="indefinite"
+                  />
+                </stop>
+                <stop offset="1">
+                  <animate
+                    attributeName="stop-color"
+                    values="#687CFF;#FF8B70;#B56CFF;#D69AFF;#6FFFF3;#2ED4FF;#687CFF"
+                    dur="60s"
+                    keyTimes="0;0.1667;0.3333;0.5;0.6667;0.8333;0.9999"
+                    calcMode="discrete"
+                    repeatCount="indefinite"
+                  />
+                </stop>
+              </linearGradient>
+
+              <filter id="hv-blur-lg" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="38" />
+              </filter>
+              <filter id="hv-orbit-soft-back" x="-30%" y="-100%" width="160%" height="300%">
+                <feGaussianBlur stdDeviation="7" />
+              </filter>
+            </defs>
+
+            {/* Blob + Back orbit */}
+            <g transform="translate(410 365) scale(1.5) translate(-410 -365)">
+              <path
+                d={BLOB}
+                fill="var(--hero-glow)"
+                opacity="0.65"
+                filter="url(#hv-blur-lg)"
+                transform="translate(10 24)"
+              />
+              <circle
+                cx="335"
+                cy="110"
+                r="170"
+                fill="#ffffff"
+                opacity="0.38"
+                filter="url(#hv-blur-lg)"
+              />
+              <Dots x={552} y={97} cols={5} rows={4} color="#ffffff" fx={0.16} fy={0.08} />
+              <Dots
+                x={632}
+                y={548}
+                cols={5}
+                rows={4}
+                color="var(--hero-orbit-c)"
+                fx={0.16}
+                fy={0.1}
+                flipY
+              />
+
+              <path d={BLOB} fill="url(#hv-blob)" />
+              <path d={BLOB} fill="url(#hv-blob-top)" />
+              <path d={BLOB} fill="url(#hv-blob-br)" />
+
+              {/* BACK ORBIT — no black hole */}
+              <g transform="translate(412 475) rotate(-15)">
+                <path
+                  d={ORBIT_BACK}
+                  stroke="url(#hv-orbit-spectrum-back)"
+                  strokeWidth="2.8"
+                  strokeLinecap="round"
+                  opacity="0.62"
+                />
+                <path
+                  d={ORBIT_BACK}
+                  stroke="url(#hv-orbit-spectrum-back)"
+                  strokeWidth="9"
+                  strokeLinecap="round"
+                  opacity="0.16"
+                  filter="url(#hv-orbit-soft-back)"
+                />
+                <path
+                  d="M-292 12A318 160 0 0 1 292 12"
+                  stroke="#ffffff"
+                  strokeWidth="0.7"
+                  strokeLinecap="round"
+                  opacity="0.3"
+                />
+
+                {/* Moving color trail — back */}
+                <path
+                  d={ORBIT_BACK}
+                  pathLength="100"
+                  stroke="url(#hv-orbit-trail-back)"
+                  strokeWidth="4.6"
+                  strokeLinecap="round"
+                  strokeDasharray="30 70"
+                  strokeDashoffset="30"
+                  opacity="0.95"
+                >
+                  <animate
+                    attributeName="stroke-dashoffset"
+                    values="30;-70"
+                    dur="12s"
+                    repeatCount="indefinite"
+                  />
+                </path>
+
+                {/* Fine luminous trail */}
+                <path
+                  d={ORBIT_BACK}
+                  pathLength="100"
+                  stroke="#ffffff"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                  strokeDasharray="18 82"
+                  opacity="0.55"
+                >
+                  <animate
+                    attributeName="stroke-dashoffset"
+                    values="18;-82"
+                    dur="12s"
+                    repeatCount="indefinite"
+                  />
+                </path>
+              </g>
+            </g>
+          </svg>
+
+          {/* PORTRAIT */}
+          <div className="absolute left-[45%] -top-[8%] z-20 h-[108%] w-full -translate-x-1/2 [mask-image:linear-gradient(to_bottom,black_97%,transparent_100%)]">
+            <Image
+              src="/images/hero-profile.png"
+              alt="Founder portrait"
+              title="Founder portrait"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-top drop-shadow-[0_0_28px_var(--hero-glow)]"
             />
+          </div>
+
+          {/* ===================== FRONT SVG ===================== */}
+          <svg
+            aria-hidden="true"
+            role="presentation"
+            focusable="false"
+            viewBox="0 0 820 730"
+            fill="none"
+            className="pointer-events-none absolute inset-0 z-30 size-full overflow-visible"
+          >
+            <defs>
+              <linearGradient
+                id="hv-orbit-spectrum-front"
+                gradientUnits="userSpaceOnUse"
+                x1="-318"
+                y1="0"
+                x2="318"
+                y2="0"
+              >
+                <stop offset="0" stopColor="#20E3D5" />
+                <stop offset="0.2" stopColor="#18A9E8" />
+                <stop offset="0.42" stopColor="#4D5FEA" />
+                <stop offset="0.62" stopColor="#F27A6A" />
+                <stop offset="0.82" stopColor="#9C5DE8" />
+                <stop offset="1" stopColor="#C778F2" />
+              </linearGradient>
+
+              {/* FRONT TRAIL — auto color change */}
+              <linearGradient
+                id="hv-orbit-trail-front"
+                gradientUnits="userSpaceOnUse"
+                x1="-318"
+                y1="0"
+                x2="318"
+                y2="0"
+              >
+                <stop offset="0">
+                  <animate
+                    attributeName="stop-color"
+                    values="#6FFFF3;#2ED4FF;#687CFF;#FF8B70;#B56CFF;#D69AFF;#6FFFF3"
+                    dur="60s"
+                    keyTimes="0;0.1667;0.3333;0.5;0.6667;0.8333;0.9999"
+                    calcMode="discrete"
+                    repeatCount="indefinite"
+                  />
+                </stop>
+                <stop offset="0.5">
+                  <animate
+                    attributeName="stop-color"
+                    values="#2ED4FF;#687CFF;#FF8B70;#B56CFF;#D69AFF;#6FFFF3;#2ED4FF"
+                    dur="60s"
+                    keyTimes="0;0.1667;0.3333;0.5;0.6667;0.8333;0.9999"
+                    calcMode="discrete"
+                    repeatCount="indefinite"
+                  />
+                </stop>
+                <stop offset="1">
+                  <animate
+                    attributeName="stop-color"
+                    values="#687CFF;#FF8B70;#B56CFF;#D69AFF;#6FFFF3;#2ED4FF;#687CFF"
+                    dur="60s"
+                    keyTimes="0;0.1667;0.3333;0.5;0.6667;0.8333;0.9999"
+                    calcMode="discrete"
+                    repeatCount="indefinite"
+                  />
+                </stop>
+              </linearGradient>
+
+              <filter id="hv-orbit-front-outer" x="-30%" y="-100%" width="160%" height="300%">
+                <feGaussianBlur stdDeviation="13" />
+              </filter>
+              <filter id="hv-orbit-front-glow" x="-20%" y="-80%" width="140%" height="260%">
+                <feGaussianBlur stdDeviation="4.5" />
+              </filter>
+            </defs>
+
+            <g transform="translate(410 365) scale(1.5) translate(-410 -365)">
+              <g transform="translate(412 475) rotate(-15)">
+                <path
+                  d={ORBIT_FRONT}
+                  stroke="url(#hv-orbit-spectrum-front)"
+                  strokeWidth="18"
+                  strokeLinecap="round"
+                  opacity="0.11"
+                  filter="url(#hv-orbit-front-outer)"
+                />
+                <path
+                  d={ORBIT_FRONT}
+                  stroke="url(#hv-orbit-spectrum-front)"
+                  strokeWidth="8"
+                  strokeLinecap="round"
+                  opacity="0.25"
+                  filter="url(#hv-orbit-front-glow)"
+                />
+                <path
+                  d={ORBIT_FRONT}
+                  stroke="url(#hv-orbit-spectrum-front)"
+                  strokeWidth="3.2"
+                  strokeLinecap="round"
+                  opacity="0.95"
+                />
+                <path
+                  d={ORBIT_FRONT}
+                  stroke="#ffffff"
+                  strokeWidth="0.8"
+                  strokeLinecap="round"
+                  opacity="0.3"
+                />
+
+                {/* Moving color trail — front */}
+                <path
+                  d={ORBIT_FRONT}
+                  pathLength="100"
+                  stroke="url(#hv-orbit-trail-front)"
+                  strokeWidth="5"
+                  strokeLinecap="round"
+                  strokeDasharray="34 66"
+                  strokeDashoffset="34"
+                  opacity="0.98"
+                >
+                  <animate
+                    attributeName="stroke-dashoffset"
+                    values="34;-66"
+                    dur="10s"
+                    repeatCount="indefinite"
+                  />
+                </path>
+
+                {/* Soft color trail */}
+                <path
+                  d={ORBIT_FRONT}
+                  pathLength="100"
+                  stroke="url(#hv-orbit-trail-front)"
+                  strokeWidth="11"
+                  strokeLinecap="round"
+                  strokeDasharray="24 76"
+                  opacity="0.22"
+                  filter="url(#hv-orbit-front-glow)"
+                >
+                  <animate
+                    attributeName="stroke-dashoffset"
+                    values="24;-76"
+                    dur="10s"
+                    repeatCount="indefinite"
+                  />
+                </path>
+
+                {/* Thin white reflection */}
+                <path
+                  d={ORBIT_FRONT}
+                  pathLength="100"
+                  stroke="#ffffff"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                  strokeDasharray="18 82"
+                  opacity="0.55"
+                >
+                  <animate
+                    attributeName="stroke-dashoffset"
+                    values="18;-82"
+                    dur="10s"
+                    repeatCount="indefinite"
+                  />
+                </path>
+
+                {/* NO BLACK HOLE HERE */}
+
+                {/* Micro sparkles */}
+                <circle cx="-238" cy="72" r="1.5" fill="#ffffff" opacity="0.58" />
+                <circle cx="-92" cy="116" r="1.1" fill="#20E3D5" opacity="0.65" />
+                <circle cx="72" cy="119" r="1.35" fill="#ffffff" opacity="0.65" />
+                <circle cx="205" cy="84" r="1.05" fill="#C778F2" opacity="0.58" />
+              </g>
+            </g>
+          </svg>
+
+          {/* FLOATING STAT CARDS */}
+          <FloatCard className="left-[1%] top-[18.5%]">
+            <IconBubble className="bg-[linear-gradient(145deg,#4a4fd6,#312e9f)]">
+              <Trophy className="size-[46%]" />
+            </IconBubble>
+            <StatText value={formatStat(STATS.years)} label={STATS.years.label} />
           </FloatCard>
 
-          <FloatCard className="right-0 top-[48%] sm:-right-6" delayed>
-            <IconBubble className="bg-emerald-500">
-              <LineChart className="size-4" />
+          <FloatCard className="right-[2%] top-[35.5%]" delayed>
+            <IconBubble className="bg-[linear-gradient(145deg,#22c793,#0fa172)]">
+              <LineChart className="size-[46%]" />
             </IconBubble>
-            <StatText
-              value={formatStat(STATS.projects)}
-              label={STATS.projects.label}
-            />
+            <StatText value={formatStat(STATS.projects)} label={STATS.projects.label} />
           </FloatCard>
 
-          <FloatCard className="bottom-[16%] left-2 sm:-left-2">
-            <IconBubble className="bg-amber-500">
-              <Star className="size-4 fill-current" />
+          <FloatCard className="left-[3%] top-[66%]">
+            <IconBubble className="bg-[linear-gradient(145deg,#ffc22e,#f5a300)]">
+              <Star className="size-[46%] fill-current" />
             </IconBubble>
-            <StatText
-              value={formatStat(STATS.rating)}
-              label={STATS.rating.label}
-            />
+            <StatText value={formatStat(STATS.rating)} label={STATS.rating.label} />
           </FloatCard>
         </Reveal>
       </Container>
@@ -213,6 +578,52 @@ export function Hero() {
   );
 }
 
+/* DOT GRID */
+function Dots({
+  x,
+  y,
+  cols,
+  rows,
+  gap = 19,
+  r = 2.3,
+  color,
+  fx,
+  fy,
+  flipY = false,
+}: {
+  x: number;
+  y: number;
+  cols: number;
+  rows: number;
+  gap?: number;
+  r?: number;
+  color: string;
+  fx: number;
+  fy: number;
+  flipY?: boolean;
+}) {
+  const dots: ReactNode[] = [];
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      const opacity = Math.max(
+        0.12,
+        1 - fx * (cols - 1 - j) - fy * (flipY ? rows - 1 - i : i),
+      );
+      dots.push(
+        <circle
+          key={`${i}-${j}`}
+          cx={x + j * gap}
+          cy={y + i * gap}
+          r={r}
+          opacity={opacity}
+        />,
+      );
+    }
+  }
+  return <g fill={color}>{dots}</g>;
+}
+
+/* FLOATING CARD */
 function FloatCard({
   children,
   className,
@@ -223,10 +634,20 @@ function FloatCard({
   delayed?: boolean;
 }) {
   return (
-    <div className={cn("absolute z-20 hidden sm:block", className)}>
+    <div className={cn("absolute z-40 hidden sm:block", className)}>
       <div
+        style={{
+          gap: "1.9cqw",
+          padding: "1.7cqw 3.4cqw 1.7cqw 2.4cqw",
+          borderRadius: "3.4cqw",
+        }}
         className={cn(
-          "glass flex items-center gap-3 rounded-2xl px-4 py-3 shadow-[var(--shadow-lg)] ring-1 ring-white/20",
+          "flex items-center",
+          "bg-white/85 dark:bg-slate-950/72",
+          "ring-1 ring-white/90 dark:ring-white/10",
+          "backdrop-blur-xl",
+          "shadow-[0_22px_50px_-16px_rgba(79,92,180,0.3)]",
+          "dark:shadow-[0_22px_55px_-16px_rgba(0,0,0,0.65)]",
           delayed ? "animate-float-delayed" : "animate-float",
         )}
       >
@@ -236,6 +657,7 @@ function FloatCard({
   );
 }
 
+/* ICON BUBBLE */
 function IconBubble({
   children,
   className,
@@ -245,8 +667,17 @@ function IconBubble({
 }) {
   return (
     <span
+      style={{
+        width: "6.3cqw",
+        height: "6.3cqw",
+        minWidth: 34,
+        minHeight: 34,
+      }}
       className={cn(
-        "flex size-10 items-center justify-center rounded-full text-white shadow-md",
+        "flex shrink-0 items-center justify-center rounded-full",
+        "text-white",
+        "shadow-[0_8px_18px_-6px_rgba(0,0,0,0.35)]",
+        "ring-1 ring-white/20",
         className,
       )}
     >
@@ -255,11 +686,22 @@ function IconBubble({
   );
 }
 
+/* STAT TEXT */
 function StatText({ value, label }: { value: string; label: string }) {
   return (
     <div>
-      <p className="text-lg font-semibold leading-none">{value}</p>
-      <p className="mt-1 text-xs text-muted-foreground">{label}</p>
+      <p
+        style={{ fontSize: "clamp(1.05rem, 3.3cqw, 1.9rem)" }}
+        className="font-serif font-bold leading-none tracking-tight text-[#131a3d] dark:text-white"
+      >
+        {value}
+      </p>
+      <p
+        style={{ fontSize: "clamp(0.65rem, 1.6cqw, 0.9rem)" }}
+        className="mt-[0.5cqw] whitespace-nowrap text-slate-500 dark:text-slate-400"
+      >
+        {label}
+      </p>
     </div>
   );
 }
