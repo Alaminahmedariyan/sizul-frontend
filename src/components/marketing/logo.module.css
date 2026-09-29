@@ -1,14 +1,30 @@
-@keyframes logoAFlow {
+@keyframes logoAColor {
   0% {
-    background-position: 0% 50%;
+    background-color: #00c6ff;
+  }
+
+  16% {
+    background-color: #2563eb;
+  }
+
+  33% {
+    background-color: #7c3aed;
   }
 
   50% {
-    background-position: 100% 50%;
+    background-color: #ec4899;
+  }
+
+  66% {
+    background-color: #f97316;
+  }
+
+  83% {
+    background-color: #06b6d4;
   }
 
   100% {
-    background-position: 0% 50%;
+    background-color: #00c6ff;
   }
 }
 
@@ -19,17 +35,7 @@
   z-index: 2;
   pointer-events: none;
 
-  background: linear-gradient(
-    110deg,
-    #00c6ff 0%,
-    #2563eb 22%,
-    #7c3aed 45%,
-    #ec4899 68%,
-    #06b6d4 84%,
-    #00c6ff 100%
-  );
-
-  background-size: 350% 350%;
+  background-color: #00c6ff;
 
   -webkit-mask-image: url("/logo-a-navbar-mask.png");
   mask-image: url("/logo-a-navbar-mask.png");
@@ -43,12 +49,12 @@
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
 
-  animation: logoAFlow 3.5s ease-in-out infinite;
+  animation: logoAColor 4s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .logoAAnimated {
     animation: none;
-    background-position: 0% 50%;
+    background-color: #00c6ff;
   }
 }
