@@ -4,6 +4,8 @@ import Link from "next/link";
 import { SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
+import styles from "./logo.module.css";
+
 export function Logo({
   className,
 }: {
@@ -37,54 +39,9 @@ export function Logo({
 
         <span
           aria-hidden="true"
-          className="logo-a-animated absolute inset-0 block"
+          className={styles.logoAAnimated}
         />
       </span>
-
-      <style jsx global>{`
-        @keyframes logoAFlow {
-          0% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-          100% {
-            background-position: 0% 50%;
-          }
-        }
-
-        .logo-a-animated {
-          background: linear-gradient(
-            110deg,
-            #00c6ff 0%,
-            #2563eb 22%,
-            #7c3aed 45%,
-            #ec4899 68%,
-            #06b6d4 84%,
-            #00c6ff 100%
-          );
-          background-size: 350% 350%;
-          -webkit-mask-image: url("/logo-a-navbar-mask.png");
-          mask-image: url("/logo-a-navbar-mask.png");
-          -webkit-mask-repeat: no-repeat;
-          mask-repeat: no-repeat;
-          -webkit-mask-position: center;
-          mask-position: center;
-          -webkit-mask-size: 100% 100%;
-          mask-size: 100% 100%;
-          animation: logoAFlow 3.5s ease-in-out infinite;
-          pointer-events: none;
-          z-index: 2;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .logo-a-animated {
-            animation: none;
-            background-position: 0% 50%;
-          }
-        }
-      `}</style>
     </Link>
   );
 }
