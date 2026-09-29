@@ -1,30 +1,10 @@
-@keyframes logoAColor {
-  0% {
-    background-color: #00c6ff;
+@keyframes logoAColorChange {
+  from {
+    filter: hue-rotate(0deg);
   }
 
-  16% {
-    background-color: #2563eb;
-  }
-
-  33% {
-    background-color: #7c3aed;
-  }
-
-  50% {
-    background-color: #ec4899;
-  }
-
-  66% {
-    background-color: #f97316;
-  }
-
-  83% {
-    background-color: #06b6d4;
-  }
-
-  100% {
-    background-color: #00c6ff;
+  to {
+    filter: hue-rotate(360deg);
   }
 }
 
@@ -49,12 +29,6 @@
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
 
-  animation: logoAColor 4s linear infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .logoAAnimated {
-    animation: none;
-    background-color: #00c6ff;
-  }
+  animation: logoAColorChange 4s linear infinite;
+  will-change: filter;
 }
