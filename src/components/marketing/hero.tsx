@@ -163,7 +163,7 @@ export function Hero() {
 
           {/* transparent PNG, background removed */}
           <Image
-            src="/images/hero-profile.png"
+            src="/images/hero-profile.jpeg"
             alt="Founder portrait"
             fill
             priority
