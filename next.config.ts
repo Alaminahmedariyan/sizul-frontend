@@ -1,9 +1,9 @@
 import type { NextConfig } from "next";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
+const BACKEND_URL = process.env.BACKEND_URL?.replace(/\/$/, "");
 
-if (!API_URL) {
-  throw new Error("NEXT_PUBLIC_API_URL is not configured.");
+if (!BACKEND_URL) {
+  throw new Error("BACKEND_URL is not configured.");
 }
 
 const nextConfig: NextConfig = {
@@ -22,7 +22,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: `${API_URL}/api/:path*`,
+        destination: `${BACKEND_URL}/api/:path*`,
       },
     ];
   },
