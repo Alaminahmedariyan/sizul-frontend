@@ -7,6 +7,8 @@ import { Topbar } from "@/components/admin/topbar";
 import { getCurrentUser } from "@/lib/get-current-user";
 import { canAccessAdminArea } from "@/lib/permissions";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminLayout({
   children,
 }: {

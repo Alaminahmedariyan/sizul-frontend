@@ -7,15 +7,14 @@ import { PortalTopbar } from "@/components/portal/topbar";
 import { getCurrentUser } from "@/lib/get-current-user";
 import { canAccessPortalArea } from "@/lib/permissions";
 
+export const dynamic = "force-dynamic";
+
 export default async function PortalLayout({
   children,
 }: {
   children: ReactNode;
 }) {
   const user = await getCurrentUser();
-
-  // TEMP DEBUG — remove after checking logs
-  console.log("[PortalLayout DEBUG] user:", JSON.stringify(user, null, 2));
 
   if (!user) {
     redirect("/sign-in?redirect=/portal/dashboard");
