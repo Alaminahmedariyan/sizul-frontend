@@ -1,10 +1,38 @@
 @keyframes logoAColorChange {
-  from {
-    filter: hue-rotate(0deg);
+  0% {
+    filter: hue-rotate(0deg) saturate(1.15) brightness(1);
   }
 
-  to {
-    filter: hue-rotate(360deg);
+  12% {
+    filter: hue-rotate(20deg) saturate(1.2) brightness(1.02);
+  }
+
+  25% {
+    filter: hue-rotate(45deg) saturate(1.25) brightness(1.04);
+  }
+
+  38% {
+    filter: hue-rotate(175deg) saturate(1.2) brightness(1.03);
+  }
+
+  50% {
+    filter: hue-rotate(215deg) saturate(1.25) brightness(1.05);
+  }
+
+  62% {
+    filter: hue-rotate(260deg) saturate(1.2) brightness(1.04);
+  }
+
+  75% {
+    filter: hue-rotate(300deg) saturate(1.2) brightness(1.03);
+  }
+
+  87% {
+    filter: hue-rotate(330deg) saturate(1.15) brightness(1.02);
+  }
+
+  100% {
+    filter: hue-rotate(360deg) saturate(1.15) brightness(1);
   }
 }
 
@@ -29,6 +57,6 @@
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
 
-  animation: logoAColorChange 4s linear infinite;
+  animation: logoAColorChange 5s ease-in-out infinite;
   will-change: filter;
 }
