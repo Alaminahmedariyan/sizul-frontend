@@ -1,0 +1,54 @@
+@keyframes logoAFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.logoAAnimated {
+  position: absolute;
+  inset: 0;
+  display: block;
+  z-index: 2;
+  pointer-events: none;
+
+  background: linear-gradient(
+    110deg,
+    #00c6ff 0%,
+    #2563eb 22%,
+    #7c3aed 45%,
+    #ec4899 68%,
+    #06b6d4 84%,
+    #00c6ff 100%
+  );
+
+  background-size: 350% 350%;
+
+  -webkit-mask-image: url("/logo-a-navbar-mask.png");
+  mask-image: url("/logo-a-navbar-mask.png");
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+
+  animation: logoAFlow 3.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logoAAnimated {
+    animation: none;
+    background-position: 0% 50%;
+  }
+}
