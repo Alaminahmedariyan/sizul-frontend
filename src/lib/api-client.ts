@@ -3,7 +3,7 @@ import type { ApiErrorResponse } from "@/types/api";
 import ApiError from "./api-error";
 
 export const apiClient = ofetch.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: "/",
   credentials: "include",
   async onResponseError({ response }) {
     const body = response._data as ApiErrorResponse | undefined;
