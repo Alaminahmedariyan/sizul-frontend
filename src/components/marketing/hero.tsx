@@ -136,12 +136,13 @@ export function Hero() {
         </div>
 
         {/* ───────── Right: cut-out portrait ───────── */}
+        {/* lg:-mt-12 pulls the whole image block up. Adjust: -mt-8 / -mt-16 / -mt-20 */}
         <Reveal
           immediate
           x={32}
           y={0}
           delay={0.25}
-          className="relative mx-auto h-[26rem] w-full max-w-md sm:h-[32rem] lg:h-[36rem] lg:max-w-none"
+          className="relative mx-auto h-[26rem] w-full max-w-md sm:h-[32rem] lg:-mt-12 lg:h-[36rem] lg:max-w-none"
         >
           {/* dot pattern, faded at the edges */}
           <div
