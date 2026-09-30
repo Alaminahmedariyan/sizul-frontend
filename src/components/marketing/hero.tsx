@@ -42,11 +42,20 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
         <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.07] via-transparent to-transparent" />
+
         <div className="hero-grid [mask-image:radial-gradient(ellipse_70%_65%_at_68%_40%,black,transparent_75%)]" />
-        <div className="absolute -right-32 -top-40 size-[40rem] rounded-full bg-primary/20 blur-[150px] dark:bg-primary/25" />
-        <div className="absolute -left-24 top-1/3 size-[28rem] rounded-full bg-violet-500/10 blur-[140px] dark:bg-violet-500/15" />
-        <div className="absolute -bottom-32 left-1/3 size-[26rem] rounded-full bg-signal/10 blur-[130px] dark:bg-signal/15" />
+
+        {/* Right ambient glow */}
+        <div className="absolute -right-24 -top-28 size-[30rem] rounded-full bg-primary/15 blur-[125px] dark:bg-primary/20" />
+
+        {/* Left ambient glow */}
+        <div className="absolute -left-16 top-[36%] size-[21rem] rounded-full bg-violet-500/[0.07] blur-[115px] dark:bg-violet-500/10" />
+
+        {/* Bottom ambient glow */}
+        <div className="absolute -bottom-24 left-[38%] size-[20rem] rounded-full bg-signal/[0.07] blur-[110px] dark:bg-signal/10" />
+
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/35 to-transparent" />
+
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
       </div>
 
@@ -86,6 +95,7 @@ export function Hero() {
                 >
                   Get a free quote
                 </Link>
+
                 <Link
                   href="/portfolio"
                   className="brand-btn-secondary w-full justify-center sm:w-auto"
@@ -104,6 +114,7 @@ export function Hero() {
                   <Phone className="size-4" />
                   {SITE.phone}
                 </Link>
+
                 <Link
                   href={`mailto:${SITE.email}`}
                   className="inline-flex items-center gap-2 transition-colors hover:text-foreground"
@@ -124,6 +135,7 @@ export function Hero() {
                     <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary ring-1 ring-primary/15">
                       <Icon className="size-4" />
                     </span>
+
                     {label}
                   </li>
                 ))}
@@ -138,20 +150,22 @@ export function Hero() {
           x={32}
           y={0}
           delay={0.25}
-          className="relative isolate mx-auto aspect-[820/730] w-full max-w-[46rem] [container-type:inline-size] lg:-mr-[6%] lg:ml-auto lg:w-[112%] lg:max-w-none"
+          className="relative isolate mx-auto aspect-[820/730] w-full max-w-[44rem] [container-type:inline-size] lg:-mr-[3%] lg:ml-auto lg:w-[106%] lg:max-w-none"
         >
-          {/* Ambient light */}
+          {/* Portrait ambient light */}
           <div
             aria-hidden="true"
-            className="absolute -right-[12%] -top-[14%] z-0 h-[75%] w-[75%] rounded-full bg-[var(--hero-glow)] blur-[120px]"
+            className="absolute -right-[7%] -top-[8%] z-0 h-[62%] w-[62%] rounded-full bg-[var(--hero-glow)] blur-[100px]"
           />
+
           <div
             aria-hidden="true"
-            className="absolute right-[12%] top-[10%] z-0 size-[62%] rounded-full bg-primary/10 blur-[100px] dark:bg-primary/15"
+            className="absolute right-[15%] top-[14%] z-0 size-[50%] rounded-full bg-primary/10 blur-[85px] dark:bg-primary/15"
           />
+
           <div
             aria-hidden="true"
-            className="absolute left-[25%] top-[28%] z-0 size-[45%] rounded-full bg-violet-500/10 blur-[90px]"
+            className="absolute left-[29%] top-[32%] z-0 size-[36%] rounded-full bg-violet-500/10 blur-[75px]"
           />
 
           {/* ===================== BACK SVG ===================== */}
@@ -164,6 +178,7 @@ export function Hero() {
             className="pointer-events-none absolute inset-0 z-10 size-full overflow-visible"
           >
             <defs>
+              {/* Blob gradient */}
               <linearGradient
                 id="hv-blob"
                 gradientUnits="userSpaceOnUse"
@@ -178,6 +193,7 @@ export function Hero() {
                 <stop offset="1" stopColor="var(--hero-blob-d)" />
               </linearGradient>
 
+              {/* Blob top glow */}
               <radialGradient
                 id="hv-blob-top"
                 gradientUnits="userSpaceOnUse"
@@ -185,10 +201,20 @@ export function Hero() {
                 cy="110"
                 r="210"
               >
-                <stop offset="0" stopColor="var(--hero-orbit-b)" stopOpacity="0.42" />
-                <stop offset="1" stopColor="var(--hero-orbit-b)" stopOpacity="0" />
+                <stop
+                  offset="0"
+                  stopColor="var(--hero-orbit-b)"
+                  stopOpacity="0.42"
+                />
+
+                <stop
+                  offset="1"
+                  stopColor="var(--hero-orbit-b)"
+                  stopOpacity="0"
+                />
               </radialGradient>
 
+              {/* Blob bottom-right glow */}
               <radialGradient
                 id="hv-blob-br"
                 gradientUnits="userSpaceOnUse"
@@ -196,10 +222,20 @@ export function Hero() {
                 cy="530"
                 r="230"
               >
-                <stop offset="0" stopColor="var(--hero-orbit-a)" stopOpacity="0.36" />
-                <stop offset="1" stopColor="var(--hero-orbit-a)" stopOpacity="0" />
+                <stop
+                  offset="0"
+                  stopColor="var(--hero-orbit-a)"
+                  stopOpacity="0.36"
+                />
+
+                <stop
+                  offset="1"
+                  stopColor="var(--hero-orbit-a)"
+                  stopOpacity="0"
+                />
               </radialGradient>
 
+              {/* Orbit spectrum */}
               <linearGradient
                 id="hv-orbit-spectrum-back"
                 gradientUnits="userSpaceOnUse"
@@ -216,7 +252,7 @@ export function Hero() {
                 <stop offset="1" stopColor="#C778F2" />
               </linearGradient>
 
-              {/* BACK TRAIL — auto color change */}
+              {/* BACK TRAIL */}
               <linearGradient
                 id="hv-orbit-trail-back"
                 gradientUnits="userSpaceOnUse"
@@ -235,6 +271,7 @@ export function Hero() {
                     repeatCount="indefinite"
                   />
                 </stop>
+
                 <stop offset="0.5">
                   <animate
                     attributeName="stop-color"
@@ -245,28 +282,42 @@ export function Hero() {
                     repeatCount="indefinite"
                   />
                 </stop>
+
                 <stop offset="1">
                   <animate
                     attributeName="stop-color"
                     values="#687CFF;#FF8B70;#B56CFF;#D69AFF;#6FFFF3;#2ED4FF;#687CFF"
                     dur="60s"
-                    keyTimes="0;0.1667;0.3333;0.5;0.6667;0.8333;0.9999"
+                    keyTimes="0;0.1667;0.3333;0.5;0.6667;0.6667;0.9999"
                     calcMode="discrete"
                     repeatCount="indefinite"
                   />
                 </stop>
               </linearGradient>
 
-              <filter id="hv-blur-lg" x="-50%" y="-50%" width="200%" height="200%">
+              <filter
+                id="hv-blur-lg"
+                x="-50%"
+                y="-50%"
+                width="200%"
+                height="200%"
+              >
                 <feGaussianBlur stdDeviation="38" />
               </filter>
-              <filter id="hv-orbit-soft-back" x="-30%" y="-100%" width="160%" height="300%">
+
+              <filter
+                id="hv-orbit-soft-back"
+                x="-30%"
+                y="-100%"
+                width="160%"
+                height="300%"
+              >
                 <feGaussianBlur stdDeviation="7" />
               </filter>
             </defs>
 
             {/* Blob + Back orbit */}
-            <g transform="translate(410 365) scale(1.5) translate(-410 -365)">
+            <g transform="translate(410 365) scale(1.4) translate(-410 -365)">
               <path
                 d={BLOB}
                 fill="var(--hero-glow)"
@@ -274,6 +325,7 @@ export function Hero() {
                 filter="url(#hv-blur-lg)"
                 transform="translate(10 24)"
               />
+
               <circle
                 cx="335"
                 cy="110"
@@ -282,7 +334,17 @@ export function Hero() {
                 opacity="0.38"
                 filter="url(#hv-blur-lg)"
               />
-              <Dots x={552} y={97} cols={5} rows={4} color="#ffffff" fx={0.16} fy={0.08} />
+
+              <Dots
+                x={552}
+                y={97}
+                cols={5}
+                rows={4}
+                color="#ffffff"
+                fx={0.16}
+                fy={0.08}
+              />
+
               <Dots
                 x={632}
                 y={548}
@@ -295,10 +357,12 @@ export function Hero() {
               />
 
               <path d={BLOB} fill="url(#hv-blob)" />
+
               <path d={BLOB} fill="url(#hv-blob-top)" />
+
               <path d={BLOB} fill="url(#hv-blob-br)" />
 
-              {/* BACK ORBIT — no black hole */}
+              {/* BACK ORBIT */}
               <g transform="translate(412 475) rotate(-15)">
                 <path
                   d={ORBIT_BACK}
@@ -307,6 +371,7 @@ export function Hero() {
                   strokeLinecap="round"
                   opacity="0.62"
                 />
+
                 <path
                   d={ORBIT_BACK}
                   stroke="url(#hv-orbit-spectrum-back)"
@@ -315,6 +380,7 @@ export function Hero() {
                   opacity="0.16"
                   filter="url(#hv-orbit-soft-back)"
                 />
+
                 <path
                   d="M-292 12A318 160 0 0 1 292 12"
                   stroke="#ffffff"
@@ -323,7 +389,7 @@ export function Hero() {
                   opacity="0.3"
                 />
 
-                {/* Moving color trail — back */}
+                {/* Moving color trail */}
                 <path
                   d={ORBIT_BACK}
                   pathLength="100"
@@ -364,7 +430,7 @@ export function Hero() {
           </svg>
 
           {/* PORTRAIT */}
-          <div className="absolute left-[45%] -top-[8%] z-20 h-[108%] w-full -translate-x-1/2 [mask-image:linear-gradient(to_bottom,black_97%,transparent_100%)]">
+          <div className="absolute left-[45%] -top-[5%] z-20 h-[104%] w-full -translate-x-1/2 [mask-image:linear-gradient(to_bottom,black_97%,transparent_100%)]">
             <Image
               src="/images/hero-profile.png"
               alt="Founder portrait"
@@ -386,6 +452,7 @@ export function Hero() {
             className="pointer-events-none absolute inset-0 z-30 size-full overflow-visible"
           >
             <defs>
+              {/* Front orbit spectrum */}
               <linearGradient
                 id="hv-orbit-spectrum-front"
                 gradientUnits="userSpaceOnUse"
@@ -402,7 +469,7 @@ export function Hero() {
                 <stop offset="1" stopColor="#C778F2" />
               </linearGradient>
 
-              {/* FRONT TRAIL — auto color change */}
+              {/* FRONT TRAIL */}
               <linearGradient
                 id="hv-orbit-trail-front"
                 gradientUnits="userSpaceOnUse"
@@ -421,6 +488,7 @@ export function Hero() {
                     repeatCount="indefinite"
                   />
                 </stop>
+
                 <stop offset="0.5">
                   <animate
                     attributeName="stop-color"
@@ -431,28 +499,43 @@ export function Hero() {
                     repeatCount="indefinite"
                   />
                 </stop>
+
                 <stop offset="1">
                   <animate
                     attributeName="stop-color"
                     values="#687CFF;#FF8B70;#B56CFF;#D69AFF;#6FFFF3;#2ED4FF;#687CFF"
                     dur="60s"
-                    keyTimes="0;0.1667;0.3333;0.5;0.6667;0.8333;0.9999"
+                    keyTimes="0;0.1667;0.3333;0.5;0.6667;0.6667;0.9999"
                     calcMode="discrete"
                     repeatCount="indefinite"
                   />
                 </stop>
               </linearGradient>
 
-              <filter id="hv-orbit-front-outer" x="-30%" y="-100%" width="160%" height="300%">
+              <filter
+                id="hv-orbit-front-outer"
+                x="-30%"
+                y="-100%"
+                width="160%"
+                height="300%"
+              >
                 <feGaussianBlur stdDeviation="13" />
               </filter>
-              <filter id="hv-orbit-front-glow" x="-20%" y="-80%" width="140%" height="260%">
+
+              <filter
+                id="hv-orbit-front-glow"
+                x="-20%"
+                y="-80%"
+                width="140%"
+                height="260%"
+              >
                 <feGaussianBlur stdDeviation="4.5" />
               </filter>
             </defs>
 
-            <g transform="translate(410 365) scale(1.5) translate(-410 -365)">
+            <g transform="translate(410 365) scale(1.4) translate(-410 -365)">
               <g transform="translate(412 475) rotate(-15)">
+                {/* Outer glow */}
                 <path
                   d={ORBIT_FRONT}
                   stroke="url(#hv-orbit-spectrum-front)"
@@ -461,6 +544,8 @@ export function Hero() {
                   opacity="0.11"
                   filter="url(#hv-orbit-front-outer)"
                 />
+
+                {/* Inner glow */}
                 <path
                   d={ORBIT_FRONT}
                   stroke="url(#hv-orbit-spectrum-front)"
@@ -469,6 +554,8 @@ export function Hero() {
                   opacity="0.25"
                   filter="url(#hv-orbit-front-glow)"
                 />
+
+                {/* Main orbit */}
                 <path
                   d={ORBIT_FRONT}
                   stroke="url(#hv-orbit-spectrum-front)"
@@ -476,6 +563,8 @@ export function Hero() {
                   strokeLinecap="round"
                   opacity="0.95"
                 />
+
+                {/* White reflection */}
                 <path
                   d={ORBIT_FRONT}
                   stroke="#ffffff"
@@ -484,7 +573,7 @@ export function Hero() {
                   opacity="0.3"
                 />
 
-                {/* Moving color trail — front */}
+                {/* Moving color trail */}
                 <path
                   d={ORBIT_FRONT}
                   pathLength="100"
@@ -540,13 +629,38 @@ export function Hero() {
                   />
                 </path>
 
-                {/* NO BLACK HOLE HERE */}
-
                 {/* Micro sparkles */}
-                <circle cx="-238" cy="72" r="1.5" fill="#ffffff" opacity="0.58" />
-                <circle cx="-92" cy="116" r="1.1" fill="#20E3D5" opacity="0.65" />
-                <circle cx="72" cy="119" r="1.35" fill="#ffffff" opacity="0.65" />
-                <circle cx="205" cy="84" r="1.05" fill="#C778F2" opacity="0.58" />
+                <circle
+                  cx="-238"
+                  cy="72"
+                  r="1.5"
+                  fill="#ffffff"
+                  opacity="0.58"
+                />
+
+                <circle
+                  cx="-92"
+                  cy="116"
+                  r="1.1"
+                  fill="#20E3D5"
+                  opacity="0.65"
+                />
+
+                <circle
+                  cx="72"
+                  cy="119"
+                  r="1.35"
+                  fill="#ffffff"
+                  opacity="0.65"
+                />
+
+                <circle
+                  cx="205"
+                  cy="84"
+                  r="1.05"
+                  fill="#C778F2"
+                  opacity="0.58"
+                />
               </g>
             </g>
           </svg>
@@ -556,21 +670,33 @@ export function Hero() {
             <IconBubble className="bg-[linear-gradient(145deg,#4a4fd6,#312e9f)]">
               <Trophy className="size-[46%]" />
             </IconBubble>
-            <StatText value={formatStat(STATS.years)} label={STATS.years.label} />
+
+            <StatText
+              value={formatStat(STATS.years)}
+              label={STATS.years.label}
+            />
           </FloatCard>
 
           <FloatCard className="right-[2%] top-[35.5%]" delayed>
             <IconBubble className="bg-[linear-gradient(145deg,#22c793,#0fa172)]">
               <LineChart className="size-[46%]" />
             </IconBubble>
-            <StatText value={formatStat(STATS.projects)} label={STATS.projects.label} />
+
+            <StatText
+              value={formatStat(STATS.projects)}
+              label={STATS.projects.label}
+            />
           </FloatCard>
 
           <FloatCard className="left-[3%] top-[66%]">
             <IconBubble className="bg-[linear-gradient(145deg,#ffc22e,#f5a300)]">
               <Star className="size-[46%] fill-current" />
             </IconBubble>
-            <StatText value={formatStat(STATS.rating)} label={STATS.rating.label} />
+
+            <StatText
+              value={formatStat(STATS.rating)}
+              label={STATS.rating.label}
+            />
           </FloatCard>
         </Reveal>
       </Container>
@@ -603,12 +729,14 @@ function Dots({
   flipY?: boolean;
 }) {
   const dots: ReactNode[] = [];
+
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       const opacity = Math.max(
         0.12,
         1 - fx * (cols - 1 - j) - fy * (flipY ? rows - 1 - i : i),
       );
+
       dots.push(
         <circle
           key={`${i}-${j}`}
@@ -620,6 +748,7 @@ function Dots({
       );
     }
   }
+
   return <g fill={color}>{dots}</g>;
 }
 
@@ -696,6 +825,7 @@ function StatText({ value, label }: { value: string; label: string }) {
       >
         {value}
       </p>
+
       <p
         style={{ fontSize: "clamp(0.65rem, 1.6cqw, 0.9rem)" }}
         className="mt-[0.5cqw] whitespace-nowrap text-slate-500 dark:text-slate-400"
