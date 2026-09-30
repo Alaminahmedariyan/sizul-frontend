@@ -335,27 +335,6 @@ export function Hero() {
                 filter="url(#hv-blur-lg)"
               />
 
-              <Dots
-                x={552}
-                y={97}
-                cols={5}
-                rows={4}
-                color="#ffffff"
-                fx={0.16}
-                fy={0.08}
-              />
-
-              <Dots
-                x={632}
-                y={548}
-                cols={5}
-                rows={4}
-                color="var(--hero-orbit-c)"
-                fx={0.16}
-                fy={0.1}
-                flipY
-              />
-
               <path d={BLOB} fill="url(#hv-blob)" />
 
               <path d={BLOB} fill="url(#hv-blob-top)" />
@@ -628,39 +607,6 @@ export function Hero() {
                     repeatCount="indefinite"
                   />
                 </path>
-
-                {/* Micro sparkles */}
-                <circle
-                  cx="-238"
-                  cy="72"
-                  r="1.5"
-                  fill="#ffffff"
-                  opacity="0.58"
-                />
-
-                <circle
-                  cx="-92"
-                  cy="116"
-                  r="1.1"
-                  fill="#20E3D5"
-                  opacity="0.65"
-                />
-
-                <circle
-                  cx="72"
-                  cy="119"
-                  r="1.35"
-                  fill="#ffffff"
-                  opacity="0.65"
-                />
-
-                <circle
-                  cx="205"
-                  cy="84"
-                  r="1.05"
-                  fill="#C778F2"
-                  opacity="0.58"
-                />
               </g>
             </g>
           </svg>
@@ -702,54 +648,6 @@ export function Hero() {
       </Container>
     </section>
   );
-}
-
-/* DOT GRID */
-function Dots({
-  x,
-  y,
-  cols,
-  rows,
-  gap = 19,
-  r = 2.3,
-  color,
-  fx,
-  fy,
-  flipY = false,
-}: {
-  x: number;
-  y: number;
-  cols: number;
-  rows: number;
-  gap?: number;
-  r?: number;
-  color: string;
-  fx: number;
-  fy: number;
-  flipY?: boolean;
-}) {
-  const dots: ReactNode[] = [];
-
-  for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < cols; j++) {
-      const opacity = Math.max(
-        0.12,
-        1 - fx * (cols - 1 - j) - fy * (flipY ? rows - 1 - i : i),
-      );
-
-      dots.push(
-        <circle
-          key={`${i}-${j}`}
-          cx={x + j * gap}
-          cy={y + i * gap}
-          r={r}
-          opacity={opacity}
-        />,
-      );
-    }
-  }
-
-  return <g fill={color}>{dots}</g>;
 }
 
 /* FLOATING CARD */
